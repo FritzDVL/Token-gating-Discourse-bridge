@@ -1,0 +1,25 @@
+{
+  "name": "token-gating-discourse-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Real-time + scheduled bridge: Ethereum NFT holdings -> Discourse group membership.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "reconcile": "node scripts/reconcile-once.js",
+    "test:lookup": "node scripts/test-lookup.js",
+    "test:holdings": "node scripts/test-holdings.js",
+    "test:dryrun-grant": "node scripts/test-dryrun-grant.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.4",
+    "express": "^4.21.1",
+    "pg": "^8.13.1"
+  }
+}

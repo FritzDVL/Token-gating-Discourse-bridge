@@ -1,0 +1,33 @@
+[Unit]
+Description=Token-gating bridge: Ethereum NFT holdings -> Discourse groups
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tgbridge
+Group=tgbridge
+WorkingDirectory=/opt/token-gating-discourse-bridge
+EnvironmentFile=/etc/token-gating-discourse-bridge.env
+ExecStart=/usr/bin/node /opt/token-gating-discourse-bridge/src/server.js
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tg-bridge
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target
